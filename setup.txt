@@ -1,3 +1,5 @@
+git hub: git@github.com:pramod-hamal/web-system-node-todo-app.git
+
 // db setup
 change username and password in /database/config/config.
 
