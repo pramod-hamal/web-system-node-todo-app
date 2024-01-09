@@ -1,0 +1,73 @@
+<div class="page-content page-container" id="page-content">
+  <div class="padding">
+    <div class="row container d-flex justify-content-center">
+      <div class="col-md-12">
+        <div class="card px-3">
+          <div class="card-body">
+            <div style="justify-content: space-between" class="d-flex">
+              <h4 class="card-title">Awesome Todo list</h4>
+              <form action="/logout" method="post">
+                <button type="submit" class="btn btn-sm btn-warning">
+                  Log Out
+                </button>
+              </form>
+            </div>
+            <form action="/todo/add" method="POST">
+              <div class="add-items d-flex">
+                <input
+                  type="text"
+                  name="title"
+                  class="form-control todo-list-input"
+                  placeholder="What do you need to do today?"
+                />
+                <button type="submit" class="btn btn-primary font-weight-bold">
+                  Add
+                </button>
+              </div>
+            </form>
+            <div class="list-wrapper">
+              <ul class="d-flex flex-column todo-list">
+                <% todos.forEach(function(todo,i){%>
+                <li
+                  style="justify-content: space-between"
+                  class="<%=todo.isFinished ? 'completed' : ''%>"
+                >
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <form
+                        id="add-to-finished-<%=todo.id%>"
+                        action="/todo/update/<%=todo.id%>"
+                        method="POST"
+                      >
+                        <input
+                        onclick="document.getElementById('add-to-finished-<%=todo.id%>').submit()"
+                        class="checkbox" type="checkbox" <%=todo.isFinished ?
+                        'checked' : ''%> /> <%=todo.title%>
+                        <i class="input-helper"></i>
+                      </form>
+                    </label>
+                  </div>
+
+                  <!-- <i class="remove mdi mdi-close-circle-outline"></i> -->
+                  <form
+                    id="remove-todo-<%=todo.id%>"
+                    action="/todo/delete/<%=todo.id%>"
+                    method="POST"
+                  >
+                    <button
+                      onclick="document.getElementById('remove-todo-<%=todo.id%>').submit()"
+                      class="btn btn-sm btn-danger"
+                    >
+                      Delete
+                    </button>
+                  </form>
+                </li>
+                <%})%>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
